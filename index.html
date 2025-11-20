@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Coin Flip</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #0d0d0d;
+        color: white;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 40px;
+    }
+
+    h1 {
+        font-size: 40px;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .coin {
+        width: 180px;
+        height: 180px;
+        margin: 40px auto;
+        perspective: 1000px;
+        cursor: pointer;
+    }
+
+    .coin-inner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 1s;
+    }
+
+    .side {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        font-size: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backface-visibility: hidden;
+        border: 4px solid #fff;
+        font-weight: bold;
+    }
+
+    .heads {
+        background: gold;
+    }
+
+    .tails {
+        background: silver;
+        transform: rotateY(180deg);
+    }
+
+    #result {
+        margin-top: 25px;
+        font-size: 32px;
+        font-weight: 600;
+    }
+
+    button {
+        margin-top: 25px;
+        padding: 12px 20px;
+        font-size: 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #ff9900;
+        font-weight: 600;
+    }
+
+</style>
+</head>
+
+<body>
+
+<h1>Coin Flip</h1>
+
+<div class="coin" onclick="flipCoin()">
+    <div class="coin-inner" id="coin-inner">
+        <div class="side heads">H</div>
+        <div class="side tails">T</div>
+    </div>
+</div>
+
+<div id="result">Click the coin to flip</div>
+
+<button onclick="flipCoin()">Flip Again</button>
+
+<script>
+function flipCoin() {
+    const coin = document.getElementById("coin-inner");
+    const result = document.getElementById("result");
+
+    const random = Math.random() < 0.5 ? "Heads" : "Tails";
+    const angle = random === "Heads" ? 0 : 180;
+
+    coin.style.transform = `rotateY(${360 + angle}deg)`;
+
+    setTimeout(() => {
+        result.innerText = "Result: " + random;
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
